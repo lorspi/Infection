@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Personalizado</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 98vh; width: 100hw;
+            /*background-image: url('Overworld-web.png');
+            background-size: 100% 100%;*/
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map', {
+            crs: L.CRS.Simple,
+            minZoom: 0,
+            maxZoom: 7
+        });
+
+        // Carpeta que contiene las imágenes
+        var imagePath = 'overworld/day/';
+
+        // Dimensiones de cada imagen
+        var imageSize = 1;
+
+        // Tamaño total de la matriz de imágenes
+        var matrixSize = 5; // 5x5 en este caso
+
+        // Centrar el mapa en la imagen central
+        var centerCoords = [0, 0];
+
+        var imageUrl = imagePath + '0,0.png';
+        var imageBounds = [centerCoords, [centerCoords[0] + imageSize, centerCoords[1] + imageSize]];
+
+        L.imageOverlay(imageUrl, imageBounds).addTo(map);
+
+        // Función para cargar las imágenes y agregarlas al mapa
+        function loadImages() {
+            for (var i = -matrixSize; i <= matrixSize; i++) {
+                for (var j = -matrixSize; j <= matrixSize; j++) {
+                    if (i === 0 && j === 0) {
+                        continue; // Saltar la imagen central
+                    }
+
+                    var imageX = centerCoords[0] + i * imageSize;
+                    var imageY = centerCoords[1] + j * imageSize;
+
+                    var imageUrl = imagePath + imageX + ',' + imageY + '.png';
+                    var imageBounds = [[imageX, imageY], [imageX + imageSize, imageY + imageSize]];
+
+                    L.imageOverlay(imageUrl, imageBounds).addTo(map);
+                }
+            }
+        }
+
+        // Llama a la función para cargar las imágenes
+        loadImages();
+
+        // Agrega marcadores u otras capas aquí si es necesario
+
+        // Centra el mapa
+        map.setView(centerCoords, 2);
+
+    </script>
+</body>
+</html>
+
+<!--
+ ../journeymap/data/mp/Infection/overworld/day/0,0.png 
+
+minZoom: -7,
+maxZoom: 0
+
+
+-->
