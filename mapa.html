@@ -20,8 +20,8 @@
     <script>
         var map = L.map('map', {
             crs: L.CRS.Simple,
-            minZoom: 0,
-            maxZoom: 7
+            minZoom: 6,                              //SE MODIFICARÁ AL ARREGLARLO
+            maxZoom: 10                              //SE MODIFICARÁ AL ARREGLARLO
         });
 
         // Carpeta que contiene las imágenes
@@ -31,7 +31,7 @@
         var imageSize = 1;
 
         // Tamaño total de la matriz de imágenes
-        var matrixSize = 5; // 5x5 en este caso
+        var matrixSize = 5; // 5x5 en este caso     //SE MODIFICARÁ AL ARREGLARLO
 
         // Centrar el mapa en la imagen central
         var centerCoords = [0, 0];
@@ -52,7 +52,7 @@
                     var imageX = centerCoords[0] + i * imageSize;
                     var imageY = centerCoords[1] + j * imageSize;
 
-                    var imageUrl = imagePath + imageX + ',' + imageY + '.png';
+                    var imageUrl = imagePath + imageY + ',' + imageX + '.png';
                     var imageBounds = [[imageX, imageY], [imageX + imageSize, imageY + imageSize]];
 
                     L.imageOverlay(imageUrl, imageBounds).addTo(map);
