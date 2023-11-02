@@ -11,6 +11,7 @@
             /*background-image: url('Overworld-web.png');
             background-size: 100% 100%;*/
         }
+        img {image-rendering: pixelated;}
     </style>
 </head>
 <body>
@@ -21,7 +22,7 @@
         var map = L.map('map', {
             crs: L.CRS.Simple,
             minZoom: 6,                              //SE MODIFICARÁ AL ARREGLARLO
-            maxZoom: 10                              //SE MODIFICARÁ AL ARREGLARLO
+            maxZoom: 12                              //SE MODIFICARÁ AL ARREGLARLO
         });
 
         // Carpeta que contiene las imágenes
@@ -62,6 +63,10 @@
 
         // Llama a la función para cargar las imágenes
         loadImages();
+
+        // Agrega marcadores u otras capas aquí si es necesario
+        L.marker([0.5, 0.5]).addTo(map)
+            .bindPopup('Marcador');
 
         // Agrega marcadores u otras capas aquí si es necesario
 
