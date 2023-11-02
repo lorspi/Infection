@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Mapa con Leaflet</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 600px;
+    }
+    img {image-rendering: pixelated;}
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([0, 0], 1);
+
+
+
+    var imageSize = 1; // Tamaño de cada imagen en píxeles
+    var matrixSize = 10; // Tamaño de la matriz 6x6
+
+    for (var y = -matrixSize / 2; y <= matrixSize / 2; y++) {
+      for (var x = -matrixSize / 2; x <= matrixSize / 2; x++) {
+        var imageUrl = `https://raw.githubusercontent.com/lorspi/Infection/c0dec893d1ae8b68f7a4039afaf8abfe1623a807/overworld/day/${x},${-y}.png`;
+        L.imageOverlay(imageUrl, [[y, x], [y + 1, x + 1]], { interactive: false }).addTo(map);
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+<!--
+ ../journeymap/data/mp/Infection/overworld/day/0,0.png 
+
+minZoom: -7,
+maxZoom: 0
+
+Crea un mapa usando leaflet basado en un arreglo de imagenes de las cuales la central es 0,0.png. A partir de ese punto en el eje Y se suma de 1 en 1 al bajar hacia el sur y se resta de 1 en 1 al subir hacia el norte. En el eje X se suma de 1 en 1 al avanzar hacia el este y se resta de 1 en 1 al avanzar hacia el oeste.
+
+El tamaño de la matriz es de 6x6.
+
+La carpeta de las imágenes es "https://raw.githubusercontent.com/lorspi/Infection/c0dec893d1ae8b68f7a4039afaf8abfe1623a807/overworld/day/"
+
+
+-->

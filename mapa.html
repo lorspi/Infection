@@ -3,11 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa Personalizado</title>
+    <title>Mapa del Overworld</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="shortcut icon" href="mapa-recursos/icon.png"/>
     <style>
+        body {margin: 0;}
         #map {
-            height: 98vh; width: 100hw;
+            height: 100vh; width: 100hw;
             /*background-image: url('Overworld-web.png');
             background-size: 100% 100%;*/
         }
@@ -21,18 +23,18 @@
     <script>
         var map = L.map('map', {
             crs: L.CRS.Simple,
-            minZoom: 6,                              //SE MODIFICARÁ AL ARREGLARLO
+            minZoom: 4,                              //SE MODIFICARÁ AL ARREGLARLO
             maxZoom: 12                              //SE MODIFICARÁ AL ARREGLARLO
         });
 
         // Carpeta que contiene las imágenes
-        var imagePath = 'https://raw.githubusercontent.com/lorspi/Infection/c0dec893d1ae8b68f7a4039afaf8abfe1623a807/overworld/day/';
+        var imagePath = 'https://raw.githubusercontent.com/lorspi/Infection/main/overworld/day/';
 
         // Dimensiones de cada imagen
         var imageSize = 1;
 
         // Tamaño total de la matriz de imágenes
-        var matrixSize = 5; // 5x5 en este caso     //SE MODIFICARÁ AL ARREGLARLO
+        var matrixSize = 20; // 5x5 en este caso     //SE MODIFICARÁ AL ARREGLARLO
 
         // Centrar el mapa en la imagen central
         var centerCoords = [0, 0];
@@ -52,8 +54,9 @@
 
                     var imageX = centerCoords[0] + i * imageSize;
                     var imageY = centerCoords[1] + j * imageSize;
+                    var imageXinv = -imageX
 
-                    var imageUrl = imagePath + imageY + ',' + imageX + '.png';
+                    var imageUrl = imagePath + imageY + ',' + imageXinv + '.png';
                     var imageBounds = [[imageX, imageY], [imageX + imageSize, imageY + imageSize]];
 
                     L.imageOverlay(imageUrl, imageBounds).addTo(map);
@@ -65,8 +68,8 @@
         loadImages();
 
         // Agrega marcadores u otras capas aquí si es necesario
-        L.marker([0.5, 0.5]).addTo(map)
-            .bindPopup('Marcador');
+        L.marker([5.7, 0.6]).addTo(map)
+            .bindPopup('Casita');
 
         // Agrega marcadores u otras capas aquí si es necesario
 
