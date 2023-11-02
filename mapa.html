@@ -74,6 +74,18 @@
         map.setView(centerCoords, 2);
 
     </script>
+    <script>
+    	document.addEventListener('DOMContentLoaded', function() {
+            var images = document.getElementsByTagName('img');
+
+            for (var i = 0; i < images.length; i++) {
+                images[i].addEventListener('error', function() {
+                    // Aplica estilos a las imágenes que no se han cargado
+                    this.style.opacity = '0';
+                });
+            }
+        });
+    </script>
     
 </body>
 </html>
