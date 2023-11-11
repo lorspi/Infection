@@ -6,6 +6,17 @@ set "carpeta_destino=overworld\comprimidas"
 
 if not exist "%carpeta_destino%" mkdir "%carpeta_destino%"
 
+rem Verificar si la carpeta de destino contiene archivos antes de intentar eliminarlos
+dir /b "%carpeta_destino%\*.*" >nul 2>nul
+if %errorlevel% equ 0 (
+    del /Q "%carpeta_destino%\*.*"
+    echo Archivos en la carpeta de destino borrados.
+) else (
+    echo La carpeta de destino ya está vacía.
+)
+
+timeout /nobreak /t 2 >nul
+
 set "contador_procesadas=0"
 set "contador_total=0"
 
