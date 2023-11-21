@@ -25,7 +25,8 @@ for /f %%i in ('dir /b /a-d "%carpeta_origen%\*.png" ^| find /c /v ""') do set "
 
 for %%i in ("%carpeta_origen%\*.png") do (
     set /a "contador_procesadas+=1"
-    echo Procesando imagen %%i - !contador_procesadas! de !contador_total!
+    rem echo Procesando imagen %%i - !contador_procesadas! de !contador_total!
+    echo Procesando imagen !contador_procesadas! de !contador_total!
     pngquant --output "%carpeta_destino%\%%~nxi" "%%i"
 )
 
